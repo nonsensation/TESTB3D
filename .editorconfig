@@ -1,0 +1,35 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+
+[*.cs]
+
+# Make field readonly
+dotnet_diagnostic.IDE0044.severity = silent
+
+# Remove unused parameter
+dotnet_diagnostic.IDE0060.severity = silent
+
+# 'using' statement can be simplified
+dotnet_diagnostic.IDE0063.severity = silent
+
+# Member is explicitly initialized to its default value
+dotnet_diagnostic.CA1805.severity = silent
+
+# Private member can be removed as the value assigned to it is never read.
+dotnet_diagnostic.IDE0052.severity = silent
+
+# Member does not access instance data and can be marked as static
+dotnet_diagnostic.CA1822.severity = silent
+
+# 'default' expression can be simplified
+dotnet_diagnostic.IDE0034.severity = silent
+
+# dotnet_analyzer_diagnostic.category-performance.severity = error
+# dotnet_analyzer_diagnostic.severity = error
