@@ -22,7 +22,7 @@
     "SpaceWithinCastParentheses": false,
     "SpaceWithinOtherParentheses": true,
     "SpaceAfterCast": false,
-    "SpacesIgnoreAroundVariableDeclaration": false,
+    "SpacesIgnoreAroundVariableDeclaration": true,
     "SpaceBeforeOpenSquareBracket": false,
     "SpaceBetweenEmptySquareBrackets": false,
     "SpaceWithinSquareBrackets": true,

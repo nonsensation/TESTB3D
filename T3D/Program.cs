@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -36,17 +37,59 @@ namespace T3D
             }
             catch( GLFWException ex )
             {
-                Console.BackgroundColor = ConsoleColor.DarkRed;
-                Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine( ex.Message );
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine( Environment.NewLine + "Press any key to exit." );
+                Logger.Fatal( ex.Message );
+                Logger.Info( Environment.NewLine + "Press any key to exit." );
                 Console.ReadKey();
 
                 return;
             }
         }
+    }
+
+    public enum LogSeverity
+    {
+        Note,
+        Info,
+        Warn,
+        Error,
+        Fatal,
+        Debug,
+    }
+
+    public static class Logger
+    {
+        public static void Log( string msg )
+        {
+            Console.WriteLine( msg );
+        }
+
+        private static readonly Dictionary<LogSeverity , (ConsoleColor bgColor, ConsoleColor fgColor)> LoggerColorMap = new() {
+            [ LogSeverity.Info  ] = (ConsoleColor.Black   , ConsoleColor.Gray       ) ,
+            [ LogSeverity.Note  ] = (ConsoleColor.Black   , ConsoleColor.White      ) ,
+            [ LogSeverity.Warn  ] = (ConsoleColor.Black   , ConsoleColor.DarkYellow ) ,
+            [ LogSeverity.Error ] = (ConsoleColor.Black   , ConsoleColor.DarkRed    ) ,
+            [ LogSeverity.Fatal ] = (ConsoleColor.DarkRed , ConsoleColor.Gray       ) ,
+            [ LogSeverity.Debug ] = (ConsoleColor.Black   , ConsoleColor.DarkCyan   ) ,
+        };
+
+        public static void Log( LogSeverity severity , string msg )
+        {
+            var (oldBackgroundColor,oldForegroundColor) = (Console.BackgroundColor,Console.ForegroundColor);
+
+            (Console.BackgroundColor,Console.ForegroundColor) = LoggerColorMap[ severity ];
+
+            Log( msg );
+
+            (Console.BackgroundColor,Console.ForegroundColor) = (oldBackgroundColor,oldForegroundColor);
+        }
+
+        public static void Note( string msg ) => Log( LogSeverity.Note , msg );
+        public static void Info( string msg ) => Log( LogSeverity.Info , msg );
+        public static void Warn( string msg ) => Log( LogSeverity.Warn , msg );
+        public static void Error( string msg ) => Log( LogSeverity.Error , msg );
+        public static void Fatal( string msg ) => Log( LogSeverity.Fatal , msg );
+        public static void Debug( string msg ) => Log( LogSeverity.Debug , msg );
+
     }
 
     public class Window : GameWindow
