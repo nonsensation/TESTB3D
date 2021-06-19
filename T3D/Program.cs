@@ -18,7 +18,6 @@ namespace T3D
 
             var nativeWindowSettings = NativeWindowSettings.Default;
             nativeWindowSettings.API = ContextAPI.OpenGL;
-            nativeWindowSettings.APIVersion = new Version( 4 , 5 );
             nativeWindowSettings.AutoLoadBindings = true;
             nativeWindowSettings.Flags = ContextFlags.Debug | ContextFlags.ForwardCompatible;
             nativeWindowSettings.IsEventDriven = false;
@@ -26,6 +25,8 @@ namespace T3D
             nativeWindowSettings.Location = new Vector2i( 100 , 100 );
             nativeWindowSettings.Profile = ContextProfile.Core;
             nativeWindowSettings.Size = new Vector2i( 1280 , 720 );
+
+            nativeWindowSettings.APIVersion = new Version( 4 , 4 );
 
             try
             {

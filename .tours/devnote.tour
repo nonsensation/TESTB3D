@@ -1,0 +1,11 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "DevNote",
+  "steps": [
+    {
+      "file": "T3D/Program.cs",
+      "description": "Require at last OpenGL version 4.4 (what is supported on an intel iGPU 5500 on Windows 10)",
+      "line": 28
+    }
+  ]
+}
